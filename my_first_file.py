@@ -158,3 +158,5 @@ print(my_intro_corrected)
 # str(), float(), int() and bool() are functions
 # that can turn an input into the desired type..
 # ...assuming this is possible. 
+str(3.14)
+float('1e10')
