@@ -39,9 +39,6 @@ def print_total(price, rate): # def, followed by function name, parenthesis (arg
     # This defines the body of the function. every code inside.
     # is going to define what the function will do.
 
-
-
-
 # We've create our functionm let's druve ut!
 print_total(10,1) # let's run this , and practice tracing the code
 # let's say : I want to store this data for later use:
@@ -54,9 +51,8 @@ def calculate_total(price, rate): #some structure as before.
     total = price * (1 + rate)
     return total # on the other side of the conveyor belt, spit out the total
 
-
 my_total = calculate_total(10, .1) # what happen when i run that ?
-price(my_total) # success: this function calculated somethin.
+print(my_total) # success: this function calculated somethin.
 # RETURNED it back to me, and now I can store it into a variable.
 # what happen if you don't store it ?
 calculate_total(10, .1) # just falls into the terminal and gets printed
@@ -86,7 +82,11 @@ print("a", "b", "c", "d", sep = "*") # Here, sep is named argument, and I give i
 # Default armument for sep is a space
 print("A", "B", "C", "D", sep = "-", end = "!")
 
-# one final but important thing: 
-def anti_exctiment(string):
+def add_excitement(string):
     excited_string = string + " !!!!!!!!!!"
     return excited_string
+    print(" The function ran successfully") # added this after return
+    # nothing is gonna excuted after 'return', anything added after return is not going work.
+
+python_is_fun = add_excitement("python is fun")
+python_is_fun
