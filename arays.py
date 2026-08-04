@@ -135,4 +135,98 @@ print(units_jan - 10)
 
 # there are many operation you can apply to arrays.... and arrays also have methods that you can inspect ! 
 units_jan.mean() # you can call the method mean(), to know the mean vaclue of an array... if the array has a numerit dtype.
-units_jan.std()
+units_jan.std() 
+
+# we've already seen that you can index and slice arrays like list:
+prices = np.array([10, 5, 20, 30, 8])
+print(prices[0]) # the first price
+print(prices[0:3])# the first three prices
+# When you index with a single value, you get a value of the dtype of the array
+# when you slice an array, you get a new array.
+
+# when working with arrays, live with lists, you can edit the elements of the array:
+# lets replace the first price by 15:
+prices[0] = 15
+print(prices)
+# what if we want to now make the first two prices equal to 15 and 7 ?
+prices[0:2] = [15, 7]
+print(prices) # arrays are still mutable! we just cannot change their shape.
+
+#everything that we've seen so far with indexing and slicing
+#is identical to what we could do with lists.
+
+# we can do more powerful stuff with arrays 
+
+# 1. "masking" or "boolean indexing".
+# we can index an array with a boolean array of the same shape.
+my_mask = np.array([True, False, True, False, True]) # this is a mask
+prices = np.array([15, 7, 20, 30, 8])
+# I have my array and my mask
+print(prices[my_mask])# I can index the prices using the mask: put the mask between square bracket after the array
+# When you index with a mask, you are going to get in return only the aclues of the array
+# where the corresponding position in the mask in True.
+# Think of overlaying the mask on top of the arrayL the True are the cutouts, any value that is in the cutout is going to be returned
+
+# when are mask useful ?
+quantities = np.array([5, 10, 15, -5, -7, 10])# Quantities cannot be neggative, to this array.
+# contains some coding errors.
+# could we create a mask that would reveal these errors ?
+my_mask = quantities < 0 # WE get a mask: an array of shape 6, that contains True or False elements
+print(my_mask) # Now we have the mask.
+# How can we use it to spot all the erronous value in quantitive ?
+print(quantities[my_mask]) # we used the mask to se all the negative value in quantities 
+# and get them in an array
+#Now, can we use the mask to replace all these negative value by 0 ?
+quantities[my_mask] = 0 # You use the mask to HIGHLIGHT all the negative vlaue and you assign the value to 0 to them.
+print(quantities)
+
+quantities = np.array([5, 10, 15, 0, 0, 10]) # this is the number of customrs a coffee shop had from monday through saturday
+# 1. On average, how many customers did they see on these six days ?( reminder: mean() is a method that gives you the mean of an array)
+# 2. On all the days they saw at least one customer, how many customer did they see on average? 
+#A1. 
+quantities.mean()
+
+#A2. 
+quantities = np.array([5, 10, 15, 0, 0, 10])
+# 第一步：创建一个 mask，标记出"至少有一位顾客"的那些天
+mask = quantities > 0
+print(mask)  # [ True  True  True False False  True]
+# 第二步：用这个 mask 筛选出对应的数值
+active_days = quantities[mask]
+print(active_days)  # [5 10 15 10]
+# 第三步：对筛选后的数组求平均
+print(active_days.mean())  # 10.0
+# or 
+# 一句话表达清楚:
+print(quantities[quantities >= 1].mean())  # what is between square brackets is the mask:
+# We don't need to store it into a variable first.
+
+# Final thing with arrays: fancy indexing... and that's pretty fancy.
+# let's say you have email from four customers.
+emails = np.array(["quantin@colorado.edu", "gal@yale.edu", "puntoni@wharton.edu", "gino@mbs.edu"])
+# how do we get the first email of the list ?
+print(emails[0])   # The first
+print(emails[0:2]) # The first two
+# with lists you can only (i) index with a single value OR (ii) use a slice.
+# with arrays you can index with multiple values.
+# that's what fancy indexing is:
+print(emails[[0, 0, 1, 2, 0]])  # when you give a LIST OF values as an index
+# note the double bracket: outer bracket does the indexing, inner bracket defines the list.
+# If it makes it easier to process, you can break it down into two lines:
+my_indices = [0, 0, 1, 2, 0]
+print(emails[my_indices])
+
+# why fancy indexing? very common: select a random sample of rows in a dataset.
+
+# Let's wrap up on arrays
+# 1. an array is a new type of iterable. It works a lot like a list
+# 2. exception 1: an array only contains values of the same type. The data type of an array is called dtype
+# 3. exception 2: arrays have a fixed shape. They can't be pop()'ed, append()'ed, or insert()'ed.
+# 4. thanks to these restrictions, arrays can be added to each other, subtracted from each other,
+# and its elements can be multiplied, squared, divided, exponentiated... whatever you want. These operations
+# are performed on all elements of the array and are much faster.
+# 5. arrays can be compared, element-wise, to create boolean arrays (also called masking)
+# 6. you can use these masks to filter arrays and re-assign values at specific positions
+# 7. Arrays, like lists, can be indexed and sliced, both to select and to replace values.
+# 8. Compared to lists, arrays accept two new forms of indexing: boolean indexing (only the values facing
+# the True values in the mask are returned), and fancy indexing (all the indices specified in the list are returned)
