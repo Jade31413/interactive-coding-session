@@ -161,3 +161,83 @@ print(grade(85))
 # 2. 真正触发的是哪一个 elif？
 # 3. 这个函数最终打印出什么？
 # 4. 如果把条件顺序换成先判断 score >= 70，会发生什么？(联系上面的坑)
+
+# ---------------------- Week 05 --------------------- #
+
+# Lets talk about range()
+
+for i in [1, 2, 3, 4, 5]: # i is the step variable, [1, 2, 3, 4, 5]is the iterable
+    print(i) # i is going to take, in turn, the vlaue of each of the lements in the iterable.
+
+# Now, imagine, we wont to get all the numbers from the 0 to 1000:
+# if we are writing the loop old way:
+for i in [0, 1, 2, 3, 4, 5, 1000]: # A bit of pain to wirte to 1000.
+    print(i)
+
+# so ... enter range() 
+# range is a function that create an iterable for you that you can loop on.
+# range takes three arguments: start, stop, step.
+# start is optional, and default to 0
+# stop is optional, and default to 1
+for i in range(1001): # all the number between 0 and 1001 are excluded.
+    print(i)
+
+#start, stop, step should remind you of slices:
+my_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+my_list[0:4]
+my_list[::2]
+
+for i in range(0, 1000, 2):
+    print(i)
+
+# all there is to know about range: A convenient way of getting an iterable of number to loop on.
+
+# The final thing on loops I want to show you is something called 
+# list comprehensions.
+
+# Let's say I want the square of all the numbers between 0 and 9
+# let's write a loop that iterates over numbers between 0 and 9,
+# take the square of them, and store them in a list called my_squares.
+
+my_squares = []
+my_numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+for i in range(10):
+    my_squares.append(i ** 2)
+print(my_squares)
+
+# This task, creating a new list from an existing iterable, is extremely common in python,
+# That is what a shortcut called list comprehensions is doing
+# Here, I could have done the same job by typing:
+my_squares = [i ** 2 for i in range(10)]
+#A list comprehension is surrounded by square bracket, THis is because we are creating a list.
+# then you see an expression: i**2 this define how the step variable is going to be modified
+# to create the elements of the list.
+# Finally, you see the loop itself: for step_variable in iterable. note, there is no colon here,
+print(my_squares)
+
+my_list = [x.upper() for x in "quentin"]
+print(my_list)
+
+# one final thing on list comprehensions:
+# we can add, after the (for step_variable in iterable) an optional IF statment,
+# that filters the elements of the list.
+
+my_filtered_squares = [i ** 2 for i in range (10) if i ** 2 < 30]
+# only add to the list if the squares are less than 30:
+my_filtered_squares
+
+# very common use case for this filter:
+paths = ["data.csv", "report.pdf", "summary.csv", "image.png", "notes.txt", "data2.csv"]
+# lots of the filters of the different types.
+# lets say I jsut want o keep the .csv files.
+my_csv = [i for i in paths if i.endswith(".csv")]
+print(my_csv)
+
+# (考试的主要形式将会是给出几个公式选择，然后来选哪个match 题目的目的)
+# How could i write a for loop that could do the same job:
+my_csv = []
+for path in paths:
+    if path.endswith(".csv"):
+        my_csv.append(path)
+print(my_csv)
