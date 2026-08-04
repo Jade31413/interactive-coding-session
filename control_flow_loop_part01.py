@@ -117,7 +117,7 @@ print(list_of_squares)
 
 list_of_numbers = [1, 2, 3, 4, 5, 6]
 list_of_squares = [] # this is what will contain our square number once we calculate them.
-for number in list_of_squares:
+for number in list_of_numbers:
     square = number ** 2 
     list_of_squares.append(square) # reminder that .append() adds to the existing list,
     #modifying it in place
